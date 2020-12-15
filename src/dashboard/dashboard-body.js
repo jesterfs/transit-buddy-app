@@ -54,7 +54,6 @@ export default class DashboardBody extends React.Component {
     
 
     componentDidMount() {
-        // this.setState({stations: store.stations.filter(station => station.line === selectedLine.id)})
     }
     render() {
         const stations = store.stations.filter(station => station.line === this.state.selectedLine.id)  
@@ -92,7 +91,7 @@ export default class DashboardBody extends React.Component {
                     <hr></hr>
                     <div className='stationMap'>
                         {stations.map(station =>
-                            <div className='item2'>
+                            <div className='item2' key={station.id}>
                                 <button className='stationbutton ' onClick={() => this.setCurrentStation(station)} key={station.id}>{station.name}</button>
                                 <br></br>
                                 <div className='line'></div>
