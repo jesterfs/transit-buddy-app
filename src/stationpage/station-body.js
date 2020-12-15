@@ -18,7 +18,7 @@ export default class StationBody extends Component {
             station: this.props.station.id,
             strikes: 0
         }
-        // console.log(report)
+        
         this.props.addReport(report)
       }
 

@@ -29,7 +29,6 @@ signup = (user) => {
 }
 
 changeUser = (id) => {
-  console.log(this.state.members)
   this.setState({user: this.state.members.find(member => member.id ==id)})
 }
 
