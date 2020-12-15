@@ -1,0 +1,32 @@
+.popupOverlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .5);
+    
+}
+.popupBody {
+    width: 100%;
+    height: 50%;
+    margin-top: 25%;
+    margin-left: 0;
+    background-color: white;
+    padding-top: 10px;
+}
+
+@media all and (min-width: 800px) {
+    .popupBody {
+        width: 50%;
+        height: 50%;
+        margin-top: 10%;
+        margin-left: 25%;
+        background-color: white;
+        
+    }
+}
+
+.reportSub {
+    margin-top: 10px;
+}

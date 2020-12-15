@@ -1,0 +1,51 @@
+
+.SignUpBody {
+  height: 100%;
+  margin: 0
+}
+.bodygroup {
+    background-color: white;
+    color: black;
+}
+
+.bodygroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0px;
+    justify-content: space-between;
+    /* text-align: center; */
+   }
+   
+   @media all and (min-width: 800px) {
+     .wrapper {
+       width: 80%;
+       margin: auto;
+     }
+   
+     
+   }
+   
+  .item {
+     flex: 1;
+     margin: 10px;
+     
+   }
+  
+  
+
+   .bodygroup {
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       width: 30%;
+       margin-left: auto;
+       margin-right: auto;
+   }
+
+   label {
+       margin: 5px;
+   }
+
+   input {
+    margin: 5px;
+}
