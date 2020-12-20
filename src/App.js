@@ -11,12 +11,14 @@ import DashboardNav from './dashboard/dashboard-nav';
 import DashboardBody from './dashboard/dashboard-body';
 import ApiContext from './ApiContext';
 import store from './store';
+import cfg from './config.js'
+import TokenServices from './services/token-services'
 
 class App extends Component {
 
   state = {
-    user: store.members[0],
-    members: store.members
+    user: null,
+    // members: store.members
 };
 
 signup = (user) => {
@@ -28,8 +30,26 @@ signup = (user) => {
   
 }
 
-changeUser = (id) => {
-  this.setState({user: this.state.members.find(member => member.id ==id)})
+
+
+changeUser = (user) => {
+  this.setState({user: user })
+}
+
+fetchUserData = (id) => {
+  fetch(cfg.API_ENDPOINT + `members/${id}`, {
+    method: 'GET', 
+    headers: {
+      'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+      'Content-Type': 'application/json',
+    }
+  })
+      .then(response => response.json())
+      .then(data => 
+        this.setState({
+          user: data
+        }, 
+      ))
 }
 
 
@@ -64,7 +84,10 @@ renderNavRoutes() {
     return(
         <>
         <Route exact path="/" component={LandingBody} />
-        <Route exact path="/login" component={LoginBody} />
+        <Route 
+            exact path="/login" 
+            component={LoginBody}
+            />
         <Route exact path="/signup" component={SignupBody} />
         <Route exact path="/dashboard" component={DashboardBody} />
         </>
@@ -86,7 +109,8 @@ renderNavRoutes() {
       user: this.state.user,
       members: this.state.members,
       changeUser: this.changeUser,
-      signup: this.signup
+      signup: this.signup,
+      fetchUserData: this.fetchUserData
     }
     return (
       <ApiContext.Provider value={value}>

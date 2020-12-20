@@ -3,6 +3,8 @@ import React, {Component} from 'react'
 import './signup-body.css'
 import store from '../store.js'
 import ApiContext from '../ApiContext.js'
+import cfg from '../config.js'
+import TokenServices from '../services/token-services'
 
 
 
@@ -14,19 +16,40 @@ export default class SignUpBody extends Component {
 
     static contextType = ApiContext;
 
+    addMemberToApi(member) {
+        return fetch(cfg.API_ENDPOINT + 'members/signup', {
+            method: 'POST', 
+            body: JSON.stringify(member),
+            headers: { 
+                'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+                'Content-type': 'application/json' }
+        })
+    
+            .then(r => r.json())
+            .then(data => this.addMember(data.member, data.token))
+            .catch((e) =>  {         
+                alert(`Couldn't add member, sorry`)    
+            }) 
+    }
+
+    addMember(member, token) {
+        this.context.changeUser(member)
+        // this.context.fetchUserData(member.id)
+        TokenServices.saveAuthToken(token)
+        this.props.history.push(`/dashboard`)       
+    }
+
     formSubmitted = e => { 
         e.preventDefault()
-        const id = this.context.members.length + 1
-        let user = {
-            id, 
-            name: e.currentTarget.signupName.value,
+    
+        const member = {
+            name: e.currentTarget.signupName.value ,
             email: e.currentTarget.signupEmail.value,
             password: e.currentTarget.signupPassword.value,
-            line: e.currentTarget.defaultLine.value,
+            line: e.currentTarget.defaultLine.value
         }
-        this.context.signup(user)
-        this.props.history.push('/dashboard')
-      }
+        this.addMemberToApi(member)
+    }
 
     
     

@@ -5,4 +5,5 @@ user: [],
 members: [],
 changeUser: () => {},
 signup: () => {},
+fetchUserData: () => {}
 })

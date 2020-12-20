@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 // import { NavLink, Link } from 'react-router-dom'
 import './login-body.css'
 import ApiContext from '../ApiContext.js'
-
+import cfg from '../config.js'
+import TokenServices from '../services/token-services'
 
 
 
@@ -12,17 +13,29 @@ export default class LoginBody extends Component {
 
     static contextType = ApiContext;
 
-    formSubmitted = e => { 
-        e.preventDefault()
-        let email = e.currentTarget.email.value
-        let password = e.currentTarget.password.value
-        let user = this.context.members.find(member => member.email == email && member.password == password)
-        if (!user) {
-            return alert('Incorrect email or password')
-        }
-        this.context.changeUser(user.id)
-        this.props.history.push('/dashboard')
-      }
+    login(email, password) {
+        return fetch(cfg.API_ENDPOINT + 'members/login', {
+            method: 'POST', 
+            body: JSON.stringify({email, password}),
+            headers: {       
+                'Content-type': 'application/json' }
+        })
+            .then(r => r.json())
+    }
+    
+    static contextType = ApiContext
+
+    handleSubmitBasicAuth = ev => {
+        ev.preventDefault()
+        const { email, password } = ev.target
+        this.login(email.value, password.value)
+        .then(r => {
+            this.context.changeUser(r.member)
+            // this.context.fetchUserData(r.member.id)
+            TokenServices.saveAuthToken(r.token, r.member.id)
+            this.props.history.push('/dashboard')
+        }) 
+    }
     
     render() {
         return(
@@ -32,7 +45,7 @@ export default class LoginBody extends Component {
                     </div>
                     
                     <div className='item'>
-                        <form className='login-form' onSubmit={this.formSubmitted} >
+                        <form className='login-form' onSubmit={this.handleSubmitBasicAuth} >
                             
                             <div>
                                 <label htmlFor="email">Email</label>

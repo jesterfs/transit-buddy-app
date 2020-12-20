@@ -4,30 +4,84 @@ import './dashboard-body.css'
 import store from '../store'
 import StationBody from '../stationpage/station-body'
 import ApiContext from '../ApiContext.js'
-// import moment from 'moment';
+import cfg from '../config.js'
+import TokenServices from '../services/token-services'
+import {fromApi} from '../diplomat'
 
 export default class DashboardBody extends React.Component {
 
     state = {
-        lines: store.lines,
-        selectedLine: store.lines[0],
-        // stations: store.stations.filter(station => station.line === this.state.selectedLine.id),  
+        user: this.context.user,
+        lines: [],
+        selectedLine: {},
+        stations: [],  
         currentStation: null,
         reports: store.reports
     };
 
     static contextType = ApiContext;
 
-    setCurrentStation = (currentStation) => this.setState({ currentStation });
+    fetchLines = () => {
+        fetch(cfg.API_ENDPOINT + `lines/`, {
+            method: 'GET', 
+            headers: {
+              'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+              'Content-Type': 'application/json',
+            }
+          })
+              .then(response => response.json())
+              .then(data => 
+                this.setState({
+                  lines: data 
+                }, 
+              ))
+    };
+    
 
-    close = () => this.setCurrentStation(null);
+    changeSelectedLine = (id) => {
+        fetch(cfg.API_ENDPOINT + `lines/${id}`, {
+            method: 'GET', 
+            headers: {
+              'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+              'Content-Type': 'application/json',
+            }
+          })
+              .then(response => response.json())
+              .then(data => 
+                this.setState({
+                  selectedLine: data,
+                  stations: data.stations  
+                }, 
+              ))
+    };
+
+    setCurrentStation = (id) => {
+        fetch(cfg.API_ENDPOINT + `stations/${id}`, {
+            method: 'GET', 
+            headers: {
+              'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+              'Content-Type': 'application/json',
+            }
+          })
+              .then(response => response.json())
+              .then(data => 
+                this.setState({
+                  currentStation: data
+                   
+                }, 
+              ))
+    };
+
+    
+
+    close = () => this.setState({currentStation: null});
 
     formSubmitted = e => { 
         e.preventDefault()
         const lineId = e.currentTarget.changeLine.value 
-        const newLine = this.state.lines.find(line => line.id == lineId)
         
-        this.setState({selectedLine: newLine})
+        
+        this.changeSelectedLine(lineId)
       }
 
     
@@ -36,42 +90,36 @@ export default class DashboardBody extends React.Component {
         this.setState({reports: [...this.state.reports, report]})
     }
 
-    // addStrike = (reportId) => {
-    //     // this.setState({reports: this.state.reports.filter(report => report.id != reportId)})
-    //     let report = this.state.reports.find(report => report.id == reportId)
-    //     let updatedReport = {
-    //         id: reportId,
-    //         name: report.name, 
-    //         date: report.date,
-    //         station: report.station,
-    //         strikes: report.strikes + 1
-    //     }
-    //     console.log(report)
-    //     console.log(updatedReport)
-        
-    // }
 
+
+    componentWillMount() {
+        this.fetchLines()
+        this.changeSelectedLine(this.state.user.line)
+    }
     
 
     componentDidMount() {
+        // this.changeSelectedLine(this.state.user.line)
     }
     render() {
-        const stations = store.stations.filter(station => station.line === this.state.selectedLine.id)  
+        
         const { currentStation } = this.state;
-        const color = `color:${this.state.selectedLine.color};`
+        
+
+        
         
         return(
             <div className='dashboardgroup'>
                 {!!currentStation && <StationBody 
                     station={currentStation} 
-                    reports={this.state.reports} 
+                    reports={currentStation.reports} 
                     close = {this.close}
                     addReport = {this.addReport}
                     addStrike = {this.addStrike}
                     />}
                     <div className='item'>
                         <h2>{this.state.selectedLine.name}</h2>
-                        <p>Hi, {this.context.user.name}</p>
+                        <p>Hi, {this.state.user.name}</p>
                     </div>
                     
                     <div className='item'>
@@ -79,6 +127,7 @@ export default class DashboardBody extends React.Component {
                         <form onSubmit={this.formSubmitted}>
                         <label htmlFor="changeLine">Select a Different Line</label>
                         <select name="changeLine" id="changeLine">
+                            <option>Select a Line</option>
                             {this.state.lines.map(line => 
                                 <option value={line.id} id={line.id} key={line.id}>
                                     {line.name}
@@ -90,9 +139,9 @@ export default class DashboardBody extends React.Component {
                     </div>
                     <hr></hr>
                     <div className='stationMap'>
-                        {stations.map(station =>
+                        {this.state.stations.map(station =>
                             <div className='item2' key={station.id}>
-                                <button className='stationbutton ' onClick={() => this.setCurrentStation(station)} key={station.id}>{station.name}</button>
+                                <button className='stationbutton ' onClick={() => this.setCurrentStation(station.id)} key={station.id}>{station.name}</button>
                                 <br></br>
                                 <div className='line'></div>
                             </div>
