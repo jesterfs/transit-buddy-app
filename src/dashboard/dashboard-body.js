@@ -142,6 +142,7 @@ export default class DashboardBody extends React.Component {
                         {this.state.stations.map(station =>
                             <div className='item2' key={station.id}>
                                 <button className='stationbutton ' onClick={() => this.setCurrentStation(station.id)} key={station.id}>{station.name}</button>
+                                  
                                 <br></br>
                                 <div className='line'></div>
                             </div>

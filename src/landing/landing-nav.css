@@ -1,15 +1,33 @@
 .group {
-    background-color: black;
+    background-color: #191b3e;
     color: white;
+    width: 100%;
 }
 
 .group {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     margin-bottom: 0px;
     justify-content: space-between;
     text-align: center;
    }
+
+#signupbtn {
+  visibility: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+a:visited {
+  color: white;
+}
+a:hover {
+  color: gray;
+}
+  
    
    @media all and (min-width: 800px) {
      .wrapper {
@@ -19,6 +37,10 @@
    
      .group {
        flex-direction: row;
+     }
+
+     #signupbtn{
+       visibility: visible;
      }
    }
    

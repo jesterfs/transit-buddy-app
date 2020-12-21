@@ -1,6 +1,8 @@
 import React from 'react'
 // import { NavLink, Link } from 'react-router-dom'
 import './dashboard-nav.css'
+import Logo from '../images/logo.png'
+
 
 export default class DashboardNav extends React.Component {
     render() {
@@ -11,7 +13,8 @@ export default class DashboardNav extends React.Component {
                     </div>
                     
                     <div className='item'>
-                        <h1>Transit Buddy</h1>
+                    <img src={Logo} alt="Transit Buddy"/>
+
                     </div>
                     <div className='item'>
                         
