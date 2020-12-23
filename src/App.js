@@ -13,6 +13,7 @@ import ApiContext from './ApiContext';
 import store from './store';
 import cfg from './config.js'
 import TokenServices from './services/token-services'
+import { Fade } from 'react-awesome-reveal'
 
 class App extends Component {
 
@@ -58,8 +59,10 @@ fetchUserData = (id) => {
 
 
 componentDidMount() {
- 
-
+  const info = TokenServices.getAuthInfo(); 
+  if(info) {
+    this.fetchUserData(info.userId) 
+  }
   
 }
 
@@ -115,16 +118,18 @@ renderNavRoutes() {
     return (
       <ApiContext.Provider value={value}>
         <div className='App'>
+          <Fade triggerOnce>
           <nav>
             {this.renderNavRoutes()}
           </nav>
           <main className='App'>
-            {/* {this.renderGreetingRoutes()} */}
+            
             {this.renderBodyRoutes()}
           </main>
           <footer>
             {this.renderFooterRoutes()}
           </footer>
+          </Fade>
         </div>
       </ApiContext.Provider>
         

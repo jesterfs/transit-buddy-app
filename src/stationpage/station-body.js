@@ -66,7 +66,7 @@ export default class StationBody extends Component {
         let reportId = e.currentTarget.value
         // this.setState({reportId: reportId})
         e.currentTarget.setAttribute("disabled", "disabled");
-        // console.log(reportId)
+        
         this.addStrike(reportId, currentStrikes)
     }
 
@@ -79,7 +79,7 @@ export default class StationBody extends Component {
         let newStrikes = {
             strikes: strikes
         }
-        console.log(reportId)
+       
 
         return fetch(cfg.API_ENDPOINT + 'reports/' + reportId, {
             method: 'PATCH', 
@@ -118,7 +118,7 @@ export default class StationBody extends Component {
         const fourDays = today - (96 * 60 * 60)
         const reports = this.state.reports.filter(report => report.strikes < 3  && new Date(report.date).getTime() / 1000 >= threeDays)
         
-        // console.log(this.daysAgo(fourDays))
+       
 
 
         
@@ -129,13 +129,16 @@ export default class StationBody extends Component {
                         <button onClick= {this.props.close}>Close</button>
                         <ul>
                             <h3>Obstacles</h3>
-
+                                <div className='reportgrid'>
+                                    <div className='reportName'>Report</div>
+                                    <div className='reportDate'>Date</div>
+                                    <div className='reportBtn'></div>
+                                </div>
                             {reports.map(report => 
-                                <li className={report.id} value={report.id} id={report.id} key={report.id}>
-                                    {report.name} - {this.daysAgo(report.date)
-                                    //  this.convertToMoment(report.date)
-                                    } - 
-                                    <button ref={`btn${report.id}`}  value={report.id} className={report.strikes + 1} onClick={this.buttonClick}>Resolved</button>
+                                <li className='reportgrid' value={report.id} id={report.id} key={report.id}>
+                                    <div className='reportName'>{report.name}</div> 
+                                    <div className='reportDate'>{this.daysAgo(report.date)}</div>  
+                                    <div className='reportBtn'><button ref={`btn${report.id}`}  value={report.id} className={report.strikes + 1} onClick={this.buttonClick}>Resolved</button></div>
                                 </li>)}
                         </ul>
                         <form onSubmit={this.formSubmitted}>
