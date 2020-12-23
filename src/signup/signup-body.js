@@ -11,10 +11,26 @@ import TokenServices from '../services/token-services'
 export default class SignUpBody extends Component {
     
     state = {
-        lines: store.lines
+        lines: []
     };
 
     static contextType = ApiContext;
+
+    fetchLines = () => {
+        fetch(cfg.API_ENDPOINT + `lines/`, {
+            method: 'GET', 
+            headers: {
+              'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+              'Content-Type': 'application/json',
+            }
+          })
+              .then(response => response.json())
+              .then(data => 
+                this.setState({
+                  lines: data 
+                }, 
+              ))
+    };
 
     addMemberToApi(member) {
         return fetch(cfg.API_ENDPOINT + 'members/signup', {
@@ -41,7 +57,9 @@ export default class SignUpBody extends Component {
 
     formSubmitted = e => { 
         e.preventDefault()
-    
+        if(e.currentTarget.signupPassword.value.length < 8) {
+            return alert('Password must be atleast 8 characters')
+        }
         const member = {
             name: e.currentTarget.signupName.value ,
             email: e.currentTarget.signupEmail.value,
@@ -52,7 +70,9 @@ export default class SignUpBody extends Component {
     }
 
     
-    
+    componentDidMount() {
+        this.fetchLines()
+    }
     
     render() {
         return(
