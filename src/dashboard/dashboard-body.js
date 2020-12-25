@@ -74,13 +74,13 @@ export default class DashboardBody extends React.Component {
             }
           })
               .then(response => response.json())
-              .then(data => 
+              .then(data => {
                 this.setState({
                   currentStation: data
                    
-                }
-              ) 
-              )
+                }) 
+                window.scrollTo(0,0)
+              })
               
     };
 
@@ -127,7 +127,7 @@ export default class DashboardBody extends React.Component {
     render() {
         
         const { currentStation } = this.state;
-        const linecolor = {border: `4px solid ${this.state.selectedLine.color}`}
+        const linecolor = {border: `4px solid ${this.state.selectedLine.color}`, backgroundColor: this.state.selectedLine.color}
         const buttonColor = { backgroundColor: ` ${this.state.selectedLine.color}`}
 
         

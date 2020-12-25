@@ -23,11 +23,13 @@ div {
     border-width: 4px;
     
     width: 0px;
-    height: 100%;
-    margin-top: 0;
-    margin-bottom: 0;
+    height: 150%;
+    margin-top: -10px;
+    margin-bottom: -10px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -79,10 +81,13 @@ hr {
     height: 50px;
     
     border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    
   }
   
   .lineFrame {
-    grid-area: line;
+    grid-area: line ;
     height: 100%;
   }
   
@@ -92,4 +97,8 @@ hr {
   
   .stationName {
     grid-area: title;
+  }
+
+  .station:last-of-type .line {
+    display: none;
   }

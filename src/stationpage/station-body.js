@@ -6,6 +6,7 @@ import moment from 'moment';
 import {fromApi} from '../diplomat'
 import cfg from '../config.js'
 import TokenServices from '../services/token-services'
+import ApiContext from '../ApiContext.js'
 
 
 
@@ -18,17 +19,7 @@ export default class StationBody extends Component {
         reports: this.props.reports
     }
 
-    // updateStrikesOnApi(strikes) { 
-    //     return fetch(cfg.API_ENDPOINT + 'reports/' + this.state.reportId, {
-    //         method: 'PATCH', 
-    //         body: JSON.stringify(strikes),
-    //         headers: { 
-    //             'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
-    //             'Content-type': 'application/json' }
-    //     })
-    //         .then(r => r.json())
-    
-    // }
+    static contextType = ApiContext;
 
     addReport(report) {
         return fetch(cfg.API_ENDPOINT + 'reports/', {
@@ -43,6 +34,9 @@ export default class StationBody extends Component {
     
     formSubmitted = e => { 
         e.preventDefault()
+        if(e.currentTarget.obstacle.value == 'Select an Obstacle'){
+            return alert('Select an Obstacle First')
+        }
         let date = new Date()
         const report = {
             name: e.currentTarget.obstacle.value, 
@@ -67,29 +61,20 @@ export default class StationBody extends Component {
         // this.setState({reportId: reportId})
         e.currentTarget.setAttribute("disabled", "disabled");
         
-        this.addStrike(reportId, currentStrikes)
+        this.addStrike(reportId)
     }
 
-    addStrike(reportId, strikes) {
+    addStrike(reportId) { 
         
-        // this.setState({strikeCount: currentStrikes+1})
-        // this.setState({reportId: e.currentTarget.value})
-        
-        
-        let newStrikes = {
-            strikes: strikes
-        }
-       
-
-        return fetch(cfg.API_ENDPOINT + 'reports/' + reportId, {
-            method: 'PATCH', 
-            body: JSON.stringify(newStrikes),
+        return fetch(cfg.API_ENDPOINT + 'reports/' + reportId + '/strike', {
+            method: 'POST', 
+            
             headers: { 
                 'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
                 'Content-type': 'application/json' }
         })
             .then(r => r.json())
-            .then(alert('Report Updated'))
+            .then(alert('Resolution Submitted!'))
 
     }  
 
@@ -146,6 +131,9 @@ export default class StationBody extends Component {
                             <div>
                                 <label htmlFor="obstacle">Obstacle:</label>
                                 <select name="obstacle" id="obstacle">
+                                    <option value='Select an Obstacle'>
+                                        Select an Obstacle
+                                    </option>
                                     <option value='Construction'>
                                         Construction
                                     </option>
