@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import './landing-body.css'
-import image1 from './images/screenshot-placeholder.gif'
+import ScreenShot from '../images/screenshot.png'
 
 export default class LandingBody extends Component {
     render() {
@@ -9,7 +9,7 @@ export default class LandingBody extends Component {
             <div className='landingbody'>
                 <div className='landinggroup group1'>
                         <div className='item'>
-                            <img src={image1} alt="placeholder" className="landing-img"/>
+                            <img src={ScreenShot} alt="TransitBuddy Dashboard" className="landing-img"/>
                         </div>
                         
                         <div className='item'>
