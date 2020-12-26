@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders the UI as expected 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="css-q7lffx"
+  >
+    <nav
+      style={Object {}}
+    >
+      <div
+        className="LandingNav, group"
+      >
+        <div
+          className="item navbtn"
+        >
+          <a
+            href="/login"
+            onClick={[Function]}
+          >
+            Log In
+          </a>
+        </div>
+        <div
+          className="item"
+        >
+          <img
+            alt="Transit Buddy"
+            src="logo.png"
+          />
+        </div>
+        <div
+          className="item"
+          id="signupbtn"
+        >
+          <a
+            href="/signup"
+            onClick={[Function]}
+          >
+            Sign Up
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div
+    className="css-q7lffx"
+  >
+    <main
+      className="App"
+      style={Object {}}
+    >
+      <div
+        className="landingbody"
+      >
+        <div
+          className="landinggroup group1"
+        >
+          <div
+            className="item"
+          >
+            <img
+              alt="TransitBuddy Dashboard"
+              className="landing-img"
+              src="screenshot.png"
+            />
+          </div>
+          <div
+            className="item"
+          >
+            <h3>
+              Riders Helping Riders
+            </h3>
+            <p>
+              Navigating complicated public transit systems is hard enough without dealing with construction, out of service elevators, and other obstacles that get in your way. With Transit Buddy, you can make your commute easier and help out your fellow riders along the way. We let you report issues along your route and see what problems other passengers have run into.
+            </p>
+          </div>
+        </div>
+        <div
+          className="landinggroup2"
+        >
+          <div
+            className="item"
+          >
+            <h3>
+              Create Your Account Today
+            </h3>
+            <a
+              href="/signup"
+              onClick={[Function]}
+            >
+              <button>
+                Sign Up
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div
+    className="css-q7lffx"
+  >
+    <footer
+      style={Object {}}
+    >
+      <div
+        className="footergroup"
+      >
+        <div
+          className="item"
+        >
+          <p>
+            Copyright 2020 by Franklin Stewart Jester
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+`;
