@@ -40,28 +40,26 @@ export default class LoginBody extends Component {
     render() {
         return(
             <div className='LoginBody, bodygroup'>
-                    <div className='item'>
-                        <h2>Welcome Back!</h2>
-                    </div>
-                    
-                    <div className='item'>
-                        <form className='login-form' onSubmit={this.handleSubmitBasicAuth} >
-                            
-                            <div>
-                                <label htmlFor="email">Email</label>
-                                <input type="email" name='email' id='email' />
-                            </div>
-                            <div>
-                                <label htmlFor="password">Password</label>
-                                <input type="password" name='password' id='password' />
-                            </div>
+                <div className='item'>
+                    <h2>Welcome Back!</h2>
+                </div>
+                
+                <div className='item'>
+                    <form className='login-form' onSubmit={this.handleSubmitBasicAuth} >
+                        
+                        <div>
+                            <label htmlFor="email">Email</label>
+                            <input type="email" name='email' id='email' />
+                        </div>
+                        <div>
+                            <label htmlFor="password">Password</label>
+                            <input type="password" name='password' id='password' />
+                        </div>
 
-                            <button type='submit'>Login</button>
-                        </form>
-                    </div>
-                    
+                        <button type='submit'>Login</button>
+                    </form>
+                </div>  
             </div>
-        )
-        
+        )    
     }
 }

@@ -1,29 +1,42 @@
 .group {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+  
+  
+a:visited {
+  color: white;
+}
+a:hover {
+  color: gray;
 }
 
 .group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0px;
-    justify-content: space-between;
-    text-align: center;
-   }
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0px;
+  justify-content: space-between;
+  text-align: center;
+  }
    
-   @media all and (min-width: 800px) {
-     .wrapper {
-       width: 80%;
-       margin: auto;
-     }
+@media all and (min-width: 800px) {
+  .wrapper {
+    width: 80%;
+    margin: auto;
+  }
+
+  .group {
+    flex-direction: row;
+  }
+}
    
-     .group {
-       flex-direction: row;
-     }
-   }
-   
-   .item {
-     flex: 1;
-     margin: 10px;
-     
-   }
+.item {
+  flex: 1;
+  margin: 10px;
+  
+}

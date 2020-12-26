@@ -14,89 +14,82 @@
     /* border: 1px dotted red; */
 }
 
-
-
 .line {
-    border-style: solid;
-    border-width: 4px;
-    
-    width: 0px;
-    height: 150%;
-    margin-top: -10px;
-    margin-bottom: -10px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    z-index: 1;
+  border-style: solid;
+  border-width: 4px;
+  
+  width: 0px;
+  height: 150%;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
 }
 
-
-
-
-
 hr {
-    width: 100%;
+  width: 100%;
 }
 
 .item {
-    flex: 1;
-    margin: 10px;
-    justify-content: space-around;
-  }
+  flex: 1;
+  margin: 10px;
+  justify-content: space-around;
+}
 
-  .item2 {
-    flex: 1;
-    margin: 0;
-    align-items: center;
-    text-align: center;
-  } 
+.item2 {
+  flex: 1;
+  margin: 0;
+  align-items: center;
+  text-align: center;
+} 
 
+.station {
+  width: 200px;
+  height: 75px;
+  display: grid;
+  grid-template-columns: 35% auto;
+  grid-template-rows: 75% auto;
+  grid-template-areas: "circle title"
+                        "line   title";
 
-  .station {
-    width: 200px;
-    height: 75px;
-    display: grid;
-    grid-template-columns: 35% auto;
-    grid-template-rows: 75% auto;
-    grid-template-areas: "circle title"
-                         "line   title";
+  margin-bottom: 5px;
+  justify-items: center;
+}
+
+.stationbutton {
+  flex: 1;
+  margin: 0;
   
-    margin-bottom: 5px;
-    justify-items: center;
-  }
-
-  .stationbutton {
-    flex: 1;
-    margin: 0;
-    
-    margin-top: 0;
-    margin-bottom: 0;
-    
-    padding: 0;
-    width: 50px;
-
-    display:block;
-    height: 50px;
-    
-    border-radius: 50%;
-    position: relative;
-    z-index: 2;
-    
-  }
+  margin-top: 0;
+  margin-bottom: 0;
   
-  .lineFrame {
-    grid-area: line ;
-    height: 100%;
-  }
-  
-  .circleFrame {
-    grid-area: circle;
-  }
-  
-  .stationName {
-    grid-area: title;
-  }
+  padding: 0;
+  width: 50px;
 
-  .station:last-of-type .line {
-    display: none;
-  }
+  display:block;
+  height: 50px;
+  
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  
+}
+
+.lineFrame {
+  grid-area: line ;
+  height: 100%;
+}
+
+.circleFrame {
+  grid-area: circle;
+}
+
+.stationName {
+  grid-area: title;
+}
+
+.station:last-of-type .line {
+  display: none;
+}

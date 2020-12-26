@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
-// import { NavLink, Link } from 'react-router-dom'
-// import store from '../store.js'
 import './station-body.css'
 import moment from 'moment';
-import {fromApi} from '../diplomat'
 import cfg from '../config.js'
 import TokenServices from '../services/token-services'
 import ApiContext from '../ApiContext.js'
@@ -58,7 +55,6 @@ export default class StationBody extends Component {
     buttonClick = e => {
         let currentStrikes = e.currentTarget.className
         let reportId = e.currentTarget.value
-        // this.setState({reportId: reportId})
         e.currentTarget.setAttribute("disabled", "disabled");
         
         this.addStrike(reportId)
@@ -68,14 +64,12 @@ export default class StationBody extends Component {
         
         return fetch(cfg.API_ENDPOINT + 'reports/' + reportId + '/strike', {
             method: 'POST', 
-            
             headers: { 
                 'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
                 'Content-type': 'application/json' }
         })
             .then(r => r.json())
             .then(alert('Resolution Submitted!'))
-
     }  
 
 
@@ -92,7 +86,6 @@ export default class StationBody extends Component {
             } else {
                 return Math.round(toHours) + ' hour(s) ago'
             }
-            
         }
 
         
@@ -100,66 +93,59 @@ export default class StationBody extends Component {
     render() {
         const today = new Date().getTime() / 1000
         const threeDays = today - (72 * 60 * 60)
-        const fourDays = today - (96 * 60 * 60)
         const reports = this.state.reports.filter(report => report.strikes < 3  && new Date(report.date).getTime() / 1000 >= threeDays)
-        
-       
-
-
         
         return(
             <div className='popupOverlay'>
-                   <div className='popupBody'>
-                        <h2>{this.props.station.name}</h2>
-                        <button onClick= {this.props.close}>Close</button>
-                        <ul>
-                            <h3>Reports</h3>
-                                <div className='reportgrid'>
-                                    <div className='reportName'>Obstacle</div>
-                                    <div className='reportDate'>Date</div>
-                                    <div className='reportBtn'></div>
-                                </div>
-                            {reports.map(report => 
-                                <li className='reportgrid' value={report.id} id={report.id} key={report.id}>
-                                    <div className='reportName'>{report.name}</div> 
-                                    <div className='reportDate'>{this.daysAgo(report.date)}</div>  
-                                    <div className='reportBtn'><button ref={`btn${report.id}`}  value={report.id} className={report.strikes + 1} onClick={this.buttonClick}>Resolved</button></div>
-                                </li>)}
-                        </ul>
-                        <form onSubmit={this.formSubmitted}>
-                            <h3>Make a Report</h3>
-                            <div>
-                                <label htmlFor="obstacle">Obstacle:</label>
-                                <select name="obstacle" id="obstacle">
-                                    <option value='Select an Obstacle'>
-                                        Select an Obstacle
-                                    </option>
-                                    <option value='Construction'>
-                                        Construction
-                                    </option>
-                                    <option value='Broken Escalator'>
-                                        Broken Escalator
-                                    </option>
-                                    <option value='Broken Elevator'>
-                                        Broken Elevator
-                                    </option>
-                                    <option value='Fare Checkpoint'>
-                                        Fare Checkpoint
-                                    </option>
-                                    <option value='Police'>
-                                        Police 
-                                    </option>
-                                    <option value='Broken Fare Machine'>
-                                        Broken Fare Machine 
-                                    </option>
-                                </select>
+                <div className='popupBody'>
+                    <h2>{this.props.station.name}</h2>
+                    <button onClick= {this.props.close}>Close</button>
+                    <ul>
+                        <h3>Reports</h3>
+                            <div className='reportgrid'>
+                                <div className='reportName'>Obstacle</div>
+                                <div className='reportDate'>Date</div>
+                                <div className='reportBtn'></div>
                             </div>
+                        {reports.map(report => 
+                            <li className='reportgrid' value={report.id} id={report.id} key={report.id}>
+                                <div className='reportName'>{report.name}</div> 
+                                <div className='reportDate'>{this.daysAgo(report.date)}</div>  
+                                <div className='reportBtn'><button ref={`btn${report.id}`}  value={report.id} className={report.strikes + 1} onClick={this.buttonClick}>Resolved</button></div>
+                            </li>)}
+                    </ul>
+                    <form onSubmit={this.formSubmitted}>
+                        <h3>Make a Report</h3>
+                        <div>
+                            <label htmlFor="obstacle">Obstacle:</label>
+                            <select name="obstacle" id="obstacle">
+                                <option value='Select an Obstacle'>
+                                    Select an Obstacle
+                                </option>
+                                <option value='Construction'>
+                                    Construction
+                                </option>
+                                <option value='Broken Escalator'>
+                                    Broken Escalator
+                                </option>
+                                <option value='Broken Elevator'>
+                                    Broken Elevator
+                                </option>
+                                <option value='Fare Checkpoint'>
+                                    Fare Checkpoint
+                                </option>
+                                <option value='Police'>
+                                    Police 
+                                </option>
+                                <option value='Broken Fare Machine'>
+                                    Broken Fare Machine 
+                                </option>
+                            </select>
+                        </div>
 
-                            <button className='reportSub' type='submit'>submit</button>
-                        </form>
-
-                        
-                   </div>                   
+                        <button className='reportSub' type='submit'>submit</button>
+                    </form>
+                </div>                   
             </div>
         )
         

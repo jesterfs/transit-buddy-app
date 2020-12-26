@@ -24,12 +24,12 @@ export default class SignUpBody extends Component {
               'Content-Type': 'application/json',
             }
           })
-              .then(response => response.json())
-              .then(data => 
+            .then(response => response.json())
+            .then(data => 
                 this.setState({
-                  lines: data 
+                    lines: data 
                 }, 
-              ))
+            ))
     };
 
     addMemberToApi(member) {
@@ -50,7 +50,6 @@ export default class SignUpBody extends Component {
 
     addMember(member, token) {
         this.context.changeUser(member)
-        // this.context.fetchUserData(member.id)
         TokenServices.saveAuthToken(token)
         this.props.history.push(`/dashboard`)       
     }
@@ -77,39 +76,39 @@ export default class SignUpBody extends Component {
     render() {
         return(
             <div className='SignUpBody, bodygroup'>
-                    <div className='item'>
-                        <h2>Create Your Transit Buddy Account</h2>
-                    </div>
-                    
-                    <div className='item'>
-                        <form class='signup-form' onSubmit={this.formSubmitted}>
+                <div className='item'>
+                    <h2>Create Your Transit Buddy Account</h2>
+                </div>
                 
-                            <div>
-                                <label htmlFor="signupName">Full Name</label>
-                                <input type="text" name='signupName' id='signupName' placeholder='Full Name' />
-                            </div>
+                <div className='item'>
+                    <form class='signup-form' onSubmit={this.formSubmitted}>
+            
+                        <div>
+                            <label htmlFor="signupName">Full Name</label>
+                            <input type="text" name='signupName' id='signupName' placeholder='Full Name' />
+                        </div>
 
-                            <div>
-                                <label htmlFor="signupEmail">Email</label>
-                                <input type="text" name='signupEmail' id='signupEmail' />
-                            </div>
-                            <div>
-                                <label htmlFor="defaultLine">Default Transit Line</label>
-                                <select name="defaultLine" id="defaultLine">
-                                    {this.state.lines.map(line => 
-                                        <option value={line.id} id={line.id} key={line.id}>
-                                            {line.name}
-                                        </option>)}
-                                </select>
-                            </div>
-                            <div>
-                                <label htmlFor="signupPassword">Password</label>
-                                <input type="password" name='signupPassword' id='signupPassword' />
-                            </div>
+                        <div>
+                            <label htmlFor="signupEmail">Email</label>
+                            <input type="text" name='signupEmail' id='signupEmail' />
+                        </div>
+                        <div>
+                            <label htmlFor="defaultLine">Default Transit Line</label>
+                            <select name="defaultLine" id="defaultLine">
+                                {this.state.lines.map(line => 
+                                    <option value={line.id} id={line.id} key={line.id}>
+                                        {line.name}
+                                    </option>)}
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="signupPassword">Password</label>
+                            <input type="password" name='signupPassword' id='signupPassword' />
+                        </div>
 
-                            <button type='submit'>Sign Up</button>
-                        </form>
-                    </div>
+                        <button type='submit'>Sign Up</button>
+                    </form>
+                </div>
                     
             </div>
         )

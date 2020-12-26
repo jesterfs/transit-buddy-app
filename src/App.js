@@ -10,7 +10,6 @@ import SignupBody from './signup/signup-body';
 import DashboardNav from './dashboard/dashboard-nav';
 import DashboardBody from './dashboard/dashboard-body';
 import ApiContext from './ApiContext';
-import store from './store';
 import cfg from './config.js'
 import TokenServices from './services/token-services'
 import { Fade } from 'react-awesome-reveal'
@@ -19,78 +18,67 @@ class App extends Component {
 
   state = {
     user: null,
-    // members: store.members
 };
 
-signup = (user) => {
-  this.setState({
-    user: user,
-    members: [...this.state.members, user]
-  })
-  
-  
-}
+  signup = (user) => {
+    this.setState({
+      user: user,
+      members: [...this.state.members, user]
+    })
+  }
 
 
 
-changeUser = (user) => {
-  this.setState({user: user })
-}
+  changeUser = (user) => {
+    this.setState({user: user })
+  }
 
-fetchUserData = (id) => {
-  fetch(cfg.API_ENDPOINT + `members/${id}`, {
-    method: 'GET', 
-    headers: {
-      'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
-      'Content-Type': 'application/json',
-    }
-  })
+  fetchUserData = (id) => {
+    fetch(cfg.API_ENDPOINT + `members/${id}`, {
+      method: 'GET', 
+      headers: {
+        'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+        'Content-Type': 'application/json',
+      }
+    })
       .then(response => response.json())
       .then(data => 
         this.setState({
           user: data
         }, 
       ))
-}
-
-
-
-
-
-
-componentDidMount() {
-  const info = TokenServices.getAuthInfo(); 
-  if(info) {
-    this.fetchUserData(info.userId) 
   }
-  
-}
 
-renderNavRoutes() {
-  return(
-    <>
-    <Route exact path="/" component={LandingNav} />
-    <Route exact path="/login" component={LoginNav} />
-    <Route exact path="/signup" component={SignupNav} />
-    <Route exact path="/dashboard" component={DashboardNav} />
-    </>
-  )
-}
 
-  // renderGreetingRoutes() {
-  //   return(
-      
-  //   )
-  // }
+
+
+
+
+  componentDidMount() {
+    const info = TokenServices.getAuthInfo(); 
+    if(info) {
+      this.fetchUserData(info.userId) 
+    }
+    
+  }
+
+  renderNavRoutes() {
+    return(
+      <>
+        <Route exact path="/" component={LandingNav} />
+        <Route exact path="/login" component={LoginNav} />
+        <Route exact path="/signup" component={SignupNav} />
+        <Route exact path="/dashboard" component={DashboardNav} />
+      </>
+    )
+  }
+
 
   renderBodyRoutes() {
     return(
         <>
         <Route exact path="/" component={LandingBody} />
-        <Route 
-            exact path="/login" 
-            component={LoginBody}
-            />
+        <Route exact path="/login" component={LoginBody}/>
         <Route exact path="/signup" component={SignupBody} />
         <Route exact path="/dashboard" component={DashboardBody} />
         </>
@@ -100,7 +88,7 @@ renderNavRoutes() {
   renderFooterRoutes() {
     return(
       <>
-      <Route path="/" component={Footer} />
+        <Route path="/" component={Footer} />
       </>
     )
   }
@@ -132,9 +120,6 @@ renderNavRoutes() {
           </Fade>
         </div>
       </ApiContext.Provider>
-        
-      
-      
     );
   }
   

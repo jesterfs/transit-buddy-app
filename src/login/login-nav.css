@@ -13,39 +13,39 @@
  }
 
 #signupbtn {
-visibility: hidden;
+  visibility: hidden;
 }
 
 a {
-text-decoration: none;
+  text-decoration: none;
+  color: white;
 }
 
 
 a:visited {
-color: white;
+  color: white; 
 }
 a:hover {
-color: gray;
+  color: gray;
 }
 
  
- @media all and (min-width: 800px) {
-   .wrapper {
-     width: 80%;
-     margin: auto;
-   }
- 
-   .group {
-     flex-direction: row;
-   }
+@media all and (min-width: 800px) {
+  .wrapper {
+    width: 80%;
+    margin: auto;
+  }
 
-   #signupbtn{
-     visibility: visible;
-   }
- }
- 
- .item {
-   flex: 1;
-   margin: 10px;
-   
- }
+  .group {
+    flex-direction: row;
+  }
+
+  #signupbtn{
+    visibility: visible;
+  }
+}
+
+.item {
+  flex: 1;
+  margin: 10px;
+}
