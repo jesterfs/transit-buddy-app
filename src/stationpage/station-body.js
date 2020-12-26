@@ -113,9 +113,9 @@ export default class StationBody extends Component {
                         <h2>{this.props.station.name}</h2>
                         <button onClick= {this.props.close}>Close</button>
                         <ul>
-                            <h3>Obstacles</h3>
+                            <h3>Reports</h3>
                                 <div className='reportgrid'>
-                                    <div className='reportName'>Report</div>
+                                    <div className='reportName'>Obstacle</div>
                                     <div className='reportDate'>Date</div>
                                     <div className='reportBtn'></div>
                                 </div>

@@ -15,9 +15,9 @@ export default class LandingBody extends Component {
                         <div className='item'>
                             <h3>Riders Helping Riders</h3>
                             <p>
-                                Navigating complicated public transit systems is hard enough without dealing with constructions, 
+                                Navigating complicated public transit systems is hard enough without dealing with construction, 
                                 out of service elevators, and other obstacles that get in your way. With Transit Buddy, you can make
-                                your commute easier and help out your fellow riders along the way. We let your report issues along
+                                your commute easier and help out your fellow riders along the way. We let you report issues along
                                 your route and see what problems other passengers have run into. 
                             </p>
                         </div>
