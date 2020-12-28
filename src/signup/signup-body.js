@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
-// import { NavLink, Link } from 'react-router-dom'
 import './signup-body.css'
-import store from '../store.js'
 import ApiContext from '../ApiContext.js'
 import cfg from '../config.js'
 import TokenServices from '../services/token-services'
@@ -77,7 +75,7 @@ export default class SignUpBody extends Component {
         return(
             <div className='SignUpBody, bodygroup'>
                 <div className='item'>
-                    <h2>Create Your Transit Buddy Account</h2>
+                    <h2>Sign Up</h2>
                 </div>
                 
                 <div className='item'>

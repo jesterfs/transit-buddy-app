@@ -30,6 +30,9 @@ export default class LoginBody extends Component {
         const { email, password } = ev.target
         this.login(email.value, password.value)
         .then(r => {
+            if(!r.member) {
+                return alert('Username or Password is incorrect')
+            }
             this.context.changeUser(r.member)
             // this.context.fetchUserData(r.member.id)
             TokenServices.saveAuthToken(r.token, r.member.id)
@@ -40,7 +43,7 @@ export default class LoginBody extends Component {
     render() {
         return(
             <div className='LoginBody, bodygroup'>
-                <div className='item'>
+                <div className='item title'>
                     <h2>Welcome Back!</h2>
                 </div>
                 

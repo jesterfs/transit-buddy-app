@@ -1,15 +1,10 @@
 import React from 'react'
-// import { NavLink, Link } from 'react-router-dom'
 import './dashboard-body.css'
-import store from '../store'
 import StationBody from '../stationpage/station-body'
 import ApiContext from '../ApiContext.js'
 import cfg from '../config.js'
 import TokenServices from '../services/token-services'
-import {fromApi} from '../diplomat'
-import { Fade } from 'react-awesome-reveal'
-import Circle from '../images/circle.png'
-import { createPortal } from 'react-dom'
+import { Redirect } from 'react-router-dom'
 
 export default class DashboardBody extends React.Component {
 
@@ -94,6 +89,12 @@ export default class DashboardBody extends React.Component {
     this.changeSelectedLine(lineId)
   }
 
+  logOut = e => {
+    e.preventDefault()
+    this.context.logOut()
+    this.props.history.push('/')
+  }
+
   
 
   addReport = (report) => {
@@ -114,9 +115,14 @@ export default class DashboardBody extends React.Component {
 
   render() {
 
+      if(this.context.user == null){
+        return <Redirect to='/login' />
+      }
+
       const { currentStation } = this.state;
       const linecolor = {border: `4px solid ${this.state.selectedLine.color}`, backgroundColor: this.state.selectedLine.color}
       const buttonColor = { backgroundColor: ` ${this.state.selectedLine.color}`}
+    
 
       return(
         <div className='dashboardgroup'>
@@ -163,6 +169,7 @@ export default class DashboardBody extends React.Component {
                     )}
                 
             </div>
+            <button onClick={this.logOut}>Log Out</button>
         </div>
       )
       

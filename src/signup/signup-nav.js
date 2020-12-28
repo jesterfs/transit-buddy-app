@@ -10,13 +10,10 @@ export default class SignUpNav extends React.Component {
                 <div className='item'>
                     <Link to='/login'>Login</Link>
                 </div>
-                
                 <div className='item'>
-                    <img src={Logo} alt="Transit Buddy"/>
+                    <Link to='/'> <img src={Logo} alt="Transit Buddy"/> </Link>
                 </div>
                 <div className='item'>
-                    
-                    
                 </div>
             </div>
         )

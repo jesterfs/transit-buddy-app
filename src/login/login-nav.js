@@ -12,7 +12,7 @@ export default class LoginNav extends React.Component {
                     </div>
                     
                     <div className='item'>
-                        <img src={Logo} alt="Transit Buddy"/>
+                        <Link to='/'> <img src={Logo} alt="Transit Buddy"/> </Link>
                     </div>
                     <div className='item'>
                     </div>

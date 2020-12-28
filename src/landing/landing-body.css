@@ -11,10 +11,11 @@
 
 .landinggroup {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     margin-bottom: 0px;
-    justify-content: space-between;
-    /* text-align: center; */
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
    }
 
 .landinggroup2 {
@@ -70,4 +71,18 @@ ul {
 img {
     width: 100%;
     border: 3px solid #191b3e;
+}
+
+.desktop {
+    display: none;
+}
+
+@media all and (min-width: 800px) {
+    .desktop {
+        display: flex
+    }
+    .mobile {
+        display: none;
+    }
+    
 }

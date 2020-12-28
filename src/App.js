@@ -49,6 +49,10 @@ class App extends Component {
       ))
   }
 
+  logOut = () => {
+    this.setState({user: null})
+  }
+
 
 
 
@@ -101,7 +105,8 @@ class App extends Component {
       members: this.state.members,
       changeUser: this.changeUser,
       signup: this.signup,
-      fetchUserData: this.fetchUserData
+      fetchUserData: this.fetchUserData,
+      logOut: this.logOut
     }
     return (
       <ApiContext.Provider value={value}>

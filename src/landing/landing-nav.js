@@ -13,7 +13,8 @@ export default class LandingNav extends React.Component {
                     </div>
                     
                     <div className='item'>
-                        <img src={Logo} alt="Transit Buddy"/>
+                    <Link to='/'> <img src={Logo} alt="Transit Buddy"/> </Link>
+
                     </div>
                     
                     <div id='signupbtn' className='item'>

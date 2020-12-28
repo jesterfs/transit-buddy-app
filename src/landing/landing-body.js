@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import './landing-body.css'
 import ScreenShot from '../images/screenshot.png'
+import MobileScreenShot from '../images/mobile-screenshot.png'
 
 export default class LandingBody extends Component {
     render() {
@@ -9,7 +10,8 @@ export default class LandingBody extends Component {
             <div className='landingbody'>
                 <div className='landinggroup group1'>
                     <div className='item'>
-                        <img src={ScreenShot} alt="TransitBuddy Dashboard" className="landing-img"/>
+                        <img src={ScreenShot} alt="TransitBuddy Dashboard" className="landing-img desktop"/>
+                        <img src={MobileScreenShot} alt="TransitBuddy Dashboard" className="landing-img mobile"/>
                     </div>
                     
                     <div className='item'>

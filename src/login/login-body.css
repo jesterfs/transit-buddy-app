@@ -8,12 +8,14 @@
     color: black;
 }
 
+
+
 .bodygroup {
     display: flex;
     flex-direction: column;
     margin-bottom: 0px;
     justify-content: space-between;
-    /* text-align: center; */
+    align-items: center;
    }
    
 @media all and (min-width: 800px) {
