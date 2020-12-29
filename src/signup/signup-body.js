@@ -79,7 +79,7 @@ export default class SignUpBody extends Component {
                 </div>
                 
                 <div className='item'>
-                    <form class='signup-form' onSubmit={this.formSubmitted}>
+                    <form className='signup-form' onSubmit={this.formSubmitted}>
             
                         <div>
                             <label htmlFor="signupName">Full Name</label>

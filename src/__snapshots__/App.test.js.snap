@@ -26,10 +26,17 @@ exports[`App component renders the UI as expected 1`] = `
         <div
           className="item"
         >
-          <img
-            alt="Transit Buddy"
-            src="logo.png"
-          />
+          <a
+            href="/"
+            onClick={[Function]}
+          >
+             
+            <img
+              alt="Transit Buddy"
+              src="logo.png"
+            />
+             
+          </a>
         </div>
         <div
           className="item"
@@ -63,8 +70,13 @@ exports[`App component renders the UI as expected 1`] = `
           >
             <img
               alt="TransitBuddy Dashboard"
-              className="landing-img"
+              className="landing-img desktop"
               src="screenshot.png"
+            />
+            <img
+              alt="TransitBuddy Dashboard"
+              className="landing-img mobile"
+              src="mobile-screenshot.png"
             />
           </div>
           <div

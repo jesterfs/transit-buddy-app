@@ -15,6 +15,7 @@ import DashboardBody from './dashboard/dashboard-body'
 import DashboardNav from './dashboard/dashboard-nav'
 
 
+
 describe('App component', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div')
@@ -43,70 +44,70 @@ describe('App component', () => {
 describe("Station Body component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<StationBody />, div);
+    ReactDOM.render(<BrowserRouter><StationBody /></BrowserRouter>, div);
   });
 });
 
 describe("Signup Nav component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<SignUpNav />, div);
+    ReactDOM.render(<BrowserRouter><SignUpNav /></BrowserRouter>, div);
   });
 });
 
 describe("Signup Body component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<SignUpBody />, div);
+    ReactDOM.render(<BrowserRouter><SignUpBody /></BrowserRouter>, div);
   });
 });
 
 describe("Login Body component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<LoginBody />, div);
+    ReactDOM.render(<BrowserRouter><LoginBody /></BrowserRouter>, div);
   });
 });
 
 describe("Login Nav component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<LoginNav />, div);
+    ReactDOM.render(<BrowserRouter><LoginNav /></BrowserRouter>, div);
   });
 });
 
 describe("Landing Nav component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<LandingNav />, div);
+    ReactDOM.render(<BrowserRouter><LandingNav /></BrowserRouter>, div);
   });
 });
 
 describe("Landing Body component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<LandingBody />, div);
+    ReactDOM.render(<BrowserRouter><LandingBody /></BrowserRouter>, div);
   });
 });
 
 describe("Footer component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<Footer />, div);
+    ReactDOM.render(<BrowserRouter><Footer /></BrowserRouter>, div);
   });
 });
 
 describe("Dashboard Body component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<DashboardBody />, div);
+    ReactDOM.render(<BrowserRouter><DashboardBody /></BrowserRouter>, div);
   });
 });
 
 describe("Dashboard Nav component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<DashboardNav />, div);
+    ReactDOM.render(<BrowserRouter><DashboardNav /></BrowserRouter>, div);
   });
 });
 

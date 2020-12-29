@@ -100,13 +100,14 @@ export default class StationBody extends Component {
                 <div className='popupBody'>
                     <h2>{this.props.station.name}</h2>
                     <button onClick= {this.props.close}>Close</button>
-                    <ul>
+                    
                         <h3>Reports</h3>
                             <div className='reportgrid'>
                                 <div className='reportName'>Obstacle</div>
                                 <div className='reportDate'>Date</div>
                                 <div className='reportBtn'></div>
                             </div>
+                    <ul>        
                         {reports.map(report => 
                             <li className='reportgrid' value={report.id} id={report.id} key={report.id}>
                                 <div className='reportName'>{report.name}</div> 
