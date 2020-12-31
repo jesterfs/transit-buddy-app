@@ -6,9 +6,6 @@ import TokenServices from '../services/token-services'
 import ApiContext from '../ApiContext.js'
 
 
-
-
-
 export default class StationBody extends Component {
 
     state = {
@@ -104,6 +101,7 @@ export default class StationBody extends Component {
                     <button onClick= {this.props.close}>Close</button>
                     
                         <h3>Reports</h3>
+                        <p className='instructions'>Is an obstacle no longer there? Help out your fellow riders by reporting it as resolved.</p>
                             <div className='reportgrid'>
                                 <div className='reportName'>Obstacle</div>
                                 <div className='reportDate'>Date</div>

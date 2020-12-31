@@ -95,12 +95,17 @@ export default class DashboardBody extends React.Component {
     this.props.history.push('/')
   }
 
-  
-
-  
 
   addReport = (report) => {
     this.setState({reports: [...this.state.reports, report]})
+  }
+
+  checkReports = (reportCount) => {
+    if(reportCount > 0) {
+      return {fontWeight: 'bolder' , fontStyle: 'italic'}
+    } else {
+      return {fontWeight: 'normal'}
+    }
   }
 
   
@@ -116,8 +121,8 @@ export default class DashboardBody extends React.Component {
   }
 
   render() {
-
-      if(this.context.user == null){
+    const info = TokenServices.getAuthInfo(); 
+      if(!info){
         return <Redirect to='/login' />
       }
 
@@ -159,17 +164,18 @@ export default class DashboardBody extends React.Component {
             
             </div>
             <hr></hr>
+            <p className='instructions'>If a station name is bold, there's an active report.</p>
             <div className='stationMap'>
-                {this.state.stations.map(station =>
-                    <div className='station' key={station.id}>
-                      {/* <div className='circle'> <input type="image" src={Circle} className='stationbutton' onClick={() => this.setCurrentStation(station.id)} key={station.id}/> </div> */}
-                        <button className='stationbutton ' onClick={() => this.setCurrentStation(station.id)} key={station.id} style={buttonColor}></button>
-                          <p className='stationName'>{station.name} </p>
-                        
-                        <div className='lineFrame grid-item3 '><div className='line' style={linecolor}></div></div>
-                        
-                    </div>
-                    )}
+              
+              {this.state.stations.map(station =>
+                  <div className='station' key={station.id}>
+                      <button className='stationbutton ' onClick={() => this.setCurrentStation(station.id)} key={station.id} style={buttonColor}></button>
+                        <p className='stationName' style={this.checkReports(station.reports)}>{station.name} </p>
+                      
+                      <div className='lineFrame grid-item3 '><div className='line' style={linecolor}></div></div>
+                      
+                  </div>
+                  )}
                 
             </div>
             <button onClick={this.logOut}>Log Out</button>

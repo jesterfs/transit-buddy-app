@@ -53,7 +53,6 @@ hr {
   grid-template-rows: 75% auto;
   grid-template-areas: "circle title"
                         "line   title";
-
   margin-bottom: 5px;
   justify-items: center;
 }
@@ -92,4 +91,8 @@ hr {
 
 .station:last-of-type .line {
   display: none;
+}
+
+.instructions {
+  font-size: 10px;
 }

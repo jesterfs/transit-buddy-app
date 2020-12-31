@@ -65,3 +65,7 @@ button {
 .reportBtn {
     grid-area: button;
 }
+
+.instructions {
+    font-size: 10px;
+}

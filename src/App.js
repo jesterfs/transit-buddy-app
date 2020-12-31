@@ -51,6 +51,7 @@ class App extends Component {
 
   logOut = () => {
     this.setState({user: null})
+    TokenServices.clearAuthToken()
   }
 
 
@@ -59,7 +60,7 @@ class App extends Component {
 
 
   componentDidMount() {
-    const info = TokenServices.getAuthInfo(); 
+    const info = TokenServices.getAuthInfo()
     if(info) {
       this.fetchUserData(info.userId) 
     }
