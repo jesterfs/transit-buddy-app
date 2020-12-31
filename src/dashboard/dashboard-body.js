@@ -97,6 +97,8 @@ export default class DashboardBody extends React.Component {
 
   
 
+  
+
   addReport = (report) => {
     this.setState({reports: [...this.state.reports, report]})
   }
@@ -122,6 +124,7 @@ export default class DashboardBody extends React.Component {
       const { currentStation } = this.state;
       const linecolor = {border: `4px solid ${this.state.selectedLine.color}`, backgroundColor: this.state.selectedLine.color}
       const buttonColor = { backgroundColor: ` ${this.state.selectedLine.color}`}
+      
     
 
       return(

@@ -44,7 +44,9 @@ describe('App component', () => {
 describe("Station Body component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<BrowserRouter><StationBody /></BrowserRouter>, div);
+    ReactDOM.render(
+    <StationBody />
+    , div);
   });
 });
 
