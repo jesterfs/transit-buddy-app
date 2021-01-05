@@ -43,9 +43,13 @@ describe('App component', () => {
 
 describe("Station Body component", () => {
   it("renders without crashing", () => {
+    const station = {
+      name: "test station"
+    };
+
     const div = document.createElement("div");
     ReactDOM.render(
-    <StationBody />
+    <StationBody station={station} reports={[]}/>
     , div);
   });
 });
