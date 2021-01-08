@@ -18,6 +18,16 @@ export default class DashboardBody extends React.Component {
 
   static contextType = ApiContext;
 
+  increaseReports = (stationId) => {
+    const { stations } = this.state;
+    const stationIndex = stations.findIndex(s => s.id == stationId)
+    const station = {...stations[stationIndex]}
+    const newStations = [...stations]
+    station.reports++
+    newStations[stationIndex] = station
+    this.setState({stations: newStations})
+  }
+
   fetchLines = () => {
     fetch(cfg.API_ENDPOINT + `lines/`, {
       method: 'GET', 
@@ -96,10 +106,6 @@ export default class DashboardBody extends React.Component {
   }
 
 
-  addReport = (report) => {
-    this.setState({reports: [...this.state.reports, report]})
-  }
-
   checkReports = (reportCount) => {
     if(reportCount > 0) {
       return {fontWeight: 'bolder' , fontStyle: 'italic'}
@@ -139,12 +145,12 @@ export default class DashboardBody extends React.Component {
               station={currentStation} 
               reports={currentStation.reports} 
               close = {this.close}
-              addReport = {this.addReport}
+              increaseReports = {this.increaseReports}
               addStrike = {this.addStrike}
               />}
           
             <div className='item'>
-                <h2>{this.state.selectedLine.name}</h2>
+                <h1>{this.state.selectedLine.name}</h1>
                 <p>Hi, {this.context.user && this.context.user.name}</p>
             </div>
             
@@ -169,7 +175,7 @@ export default class DashboardBody extends React.Component {
               
               {this.state.stations.map(station =>
                   <div className='station' key={station.id}>
-                      <button className='stationbutton ' onClick={() => this.setCurrentStation(station.id)} key={station.id} style={buttonColor}></button>
+                      <button title={station.name} className='stationbutton ' onClick={() => this.setCurrentStation(station.id)} key={station.id} style={buttonColor}></button>
                         <p className='stationName' style={this.checkReports(station.reports)}>{station.name} </p>
                       
                       <div className='lineFrame grid-item3 '><div className='line' style={linecolor}></div></div>

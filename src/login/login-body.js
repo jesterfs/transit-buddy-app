@@ -44,7 +44,7 @@ export default class LoginBody extends Component {
         return(
             <div className='LoginBody, bodygroup'>
                 <div className='item title'>
-                    <h2>Welcome Back!</h2>
+                    <h1>Welcome Back!</h1>
                 </div>
                 
                 <div className='item'>

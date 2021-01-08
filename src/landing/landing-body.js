@@ -3,9 +3,17 @@ import { Link } from 'react-router-dom'
 import './landing-body.css'
 import ScreenShot from '../images/screenshot.png'
 import MobileScreenShot from '../images/mobile-screenshot.png'
+import { Redirect } from 'react-router-dom'
+import TokenServices from '../services/token-services'
 
 export default class LandingBody extends Component {
     render() {
+
+        const info = TokenServices.getAuthInfo(); 
+        if(info){
+            return <Redirect to='/dashboard' />
+        }
+
         return(
             <div className='landingbody'>
                 <div className='landinggroup group1'>
@@ -15,7 +23,7 @@ export default class LandingBody extends Component {
                     </div>
                     
                     <div className='item'>
-                        <h3>Riders Helping Riders</h3>
+                        <h2>Riders Helping Riders</h2>
                         <p>
                             Navigating complicated public transit systems is hard enough without dealing with construction, 
                             out of service elevators, and other obstacles that get in your way. With Transit Buddy, you can make
@@ -26,7 +34,7 @@ export default class LandingBody extends Component {
                 </div>
                 <div className='landinggroup2'>
                     <div className='item'>
-                        <h3>Create Your Account Today</h3>
+                        <h2>Create Your Account Today</h2>
                         <Link to='/signup'><button>Sign Up</button></Link>
                     </div>
                 </div>        

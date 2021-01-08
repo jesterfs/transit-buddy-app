@@ -40,6 +40,7 @@ export default class StationBody extends Component {
         this.addReport(report) 
             .then(report => {
                 this.setState({reports: [...this.state.reports, report]})
+                this.props.increaseReports(this.props.station.id)
                 alert('report added')
             })
         
@@ -97,11 +98,11 @@ export default class StationBody extends Component {
         return(
             <div className='popupOverlay'>
                 <div className='popupBody'>
-                    <h2>{this.props.station.name}</h2>
+                    <h1>{this.props.station.name}</h1>
                     <button onClick= {this.props.close}>Close</button>
                     
-                        <h3>Reports</h3>
-                        <p className='instructions'>Is an obstacle no longer there? Help out your fellow riders by reporting it as resolved.</p>
+                        <h2>Reports</h2>
+                        <p className='instructions'>Is an obstacle no longer there? Report it as resolved.</p>
                             <div className='reportgrid'>
                                 <div className='reportName'>Obstacle</div>
                                 <div className='reportDate'>Date</div>
@@ -116,7 +117,7 @@ export default class StationBody extends Component {
                             </li>)}
                     </ul>
                     <form onSubmit={this.formSubmitted}>
-                        <h3>Make a Report</h3>
+                        <h2>Make a Report</h2>
                         <div>
                             <label htmlFor="obstacle">Obstacle:</label>
                             <select name="obstacle" id="obstacle">
