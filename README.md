@@ -4,6 +4,8 @@ Front End Technology Used: React.js, JavaScript, Html, CSS
 
 Live App: https://transitbuddy.netlify.app/
 
+Front End Repo: https://github.com/jesterfs/transit-buddy-app
+
 Back End Repo: https://github.com/jesterfs/transit-buddy-api
 
 Summary: Transit Buddy is a tool for transit riders to see what obstacles they might encounter on their commute and report any obstacles they encounter.
