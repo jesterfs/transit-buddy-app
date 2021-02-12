@@ -1,5 +1,7 @@
 TRANSIT BUDDY
 
+Front End Technology Used: React.js, JavaScript, Html, CSS
+
 Live App: https://transitbuddy.netlify.app/
 
 Back End Repo: https://github.com/jesterfs/transit-buddy-api
@@ -16,5 +18,4 @@ Upon selecting a station, the user can see active obstacles, report them as reso
 ![TRANSIT BUDDY MAP](https://raw.githubusercontent.com/jesterfs/transit-buddy-app/main/src/images/Screen%20Shot%202020-12-25%20at%204.52.54%20PM.png)
 
 
-Technology Used:
-React.js, JavaScript, Html, CSS
+
