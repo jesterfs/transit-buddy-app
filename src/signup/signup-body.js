@@ -9,14 +9,19 @@ import TokenServices from '../services/token-services'
 export default class SignUpBody extends Component {
     
     state = {
-        lines: []
+        lines: [],
+        endpoint: console.log(cfg.API_ENDPOINT + `lines/`)
     };
 
     static contextType = ApiContext;
 
+    
+
     fetchLines = () => {
+        //console.log(cfg.API_ENDPOINT + `lines/`);
         fetch(cfg.API_ENDPOINT + `lines/`, {
             method: 'GET', 
+            mode: 'cors',
             headers: {
               'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
               'Content-Type': 'application/json',
@@ -24,10 +29,14 @@ export default class SignUpBody extends Component {
           })
             .then(response => response.json())
             .then(data => 
+                
                 this.setState({
                     lines: data 
                 }, 
             ))
+            .catch((e) =>  {         
+                alert(`Couldn't add member, sorry`)    
+            }) 
     };
 
     addMemberToApi(member) {
@@ -40,16 +49,19 @@ export default class SignUpBody extends Component {
         })
     
             .then(r => r.json())
-            .then(data => this.addMember(data.member, data.token))
+            .then(data => 
+                //console.log(member)
+                this.login(member.email, member.password)     
+                )
             .catch((e) =>  {         
                 alert(`Couldn't add member, sorry`)    
             }) 
     }
 
     addMember(member, token) {
-        this.context.changeUser(member)
+        //this.context.changeUser(member)
         TokenServices.saveAuthToken(token)
-        this.props.history.push(`/dashboard`)       
+        this.login(member.email, member.password)      
     }
 
     formSubmitted = e => { 
@@ -66,16 +78,41 @@ export default class SignUpBody extends Component {
         this.addMemberToApi(member)
     }
 
+    login(email, password) {
+        return fetch(cfg.API_ENDPOINT + 'members/login', {
+            method: 'POST', 
+            body: JSON.stringify({email, password}),
+            headers: {       
+                'Content-type': 'application/json' }
+        })
+            .then(r => r.json())
+            .then(r => {
+                if(!r) {
+                    console.log('No member sent')
+                    return alert('Username or Password is incorrect')
+                }
+                console.log(r)
+                this.context.changeUser(r)
+                // this.context.fetchUserData(r.member.id)
+                TokenServices.saveAuthToken(r.token, r.id)
+                this.props.history.push('/dashboard')
+            })
+           
+    }
+
     
     componentDidMount() {
+        
         this.fetchLines()
     }
     
     render() {
+        
         return(
             <div className='SignUpBody, bodygroup'>
                 <div className='item'>
                     <h1>Sign Up</h1>
+        
                 </div>
                 
                 <div className='item'>

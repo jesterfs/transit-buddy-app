@@ -30,7 +30,10 @@ class App extends Component {
 
 
   changeUser = (user) => {
+    //console.log('made it here')
+    //console.log(user)
     this.setState({user: user })
+    //console.log(this.state)
   }
 
   fetchUserData = (id) => {

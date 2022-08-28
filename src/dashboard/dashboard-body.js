@@ -13,6 +13,7 @@ export default class DashboardBody extends React.Component {
       selectedLine: {},
       stations: [],  
       currentStation: null,
+      currentReports:[],
       lineFetched: false
   };
 
@@ -43,6 +44,43 @@ export default class DashboardBody extends React.Component {
         }, 
       ))
   };
+
+  setCurrentLine = (id) => {
+      
+    fetch(cfg.API_ENDPOINT + `test/lines/${id}`, {
+      method: 'GET', 
+      headers: {
+        'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(response => response.json())
+      .then(data => 
+        this.setState({
+          selectedLine: data,
+          stations: data.stations,
+          lineFetched: true
+        }, console.log(data)
+      ))
+  };
+
+  fetchStations = (id) => {
+    fetch(cfg.API_ENDPOINT + `stations/line/${id}`, {
+      method: 'GET', 
+      headers: {
+        'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(response => response.json())
+      .then(data => 
+        this.setState({
+          stations: data.rows 
+        }, 
+        //console.log('current stations'),
+        //console.log(data.rows)
+      ))
+  };
   
 
   changeSelectedLine = (id) => {
@@ -58,10 +96,15 @@ export default class DashboardBody extends React.Component {
       .then(data => 
         this.setState({
           selectedLine: data,
-          stations: data.stations,
           lineFetched: true
-        }, 
+        },
+        this.setState({selectedLine: data}),
+        //console.log('made it here'),
+        this.fetchStations(this.state.selectedLine.id),
+        //console.log(this.state) 
       ))
+      
+      
   };
 
   changeLineColor(color) {
@@ -69,6 +112,7 @@ export default class DashboardBody extends React.Component {
   }
 
   setCurrentStation = (id) => {
+    console.log(id)
     fetch(cfg.API_ENDPOINT + `stations/${id}`, {
       method: 'GET', 
       headers: {
@@ -81,9 +125,29 @@ export default class DashboardBody extends React.Component {
         this.setState({
           currentStation: data
             
-        }) 
+        }, this.fetchReports(data.id) ) 
         window.scrollTo(0,0)
-      })
+        
+        
+      } )
+  };
+
+  fetchReports = (id) => {
+    fetch(cfg.API_ENDPOINT + `reports/station/${id}`, {
+      method: 'GET', 
+      headers: {
+        'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(response => response.json())
+      .then(data => 
+        this.setState({
+          currentReports: data 
+        }, 
+        console.log('made it here'),
+        console.log(data)
+      ))
   };
 
   
@@ -118,15 +182,24 @@ export default class DashboardBody extends React.Component {
   componentDidUpdate() {
     if(this.context.user && !this.state.lineFetched) {
       this.changeSelectedLine(this.context.user.line) 
+      //this.fetchStations(this.state.selectedLine.id)
     }
   }
 
   componentDidMount() {
+    if(!this.context.user) {
+      window.location.replace("http://localhost:3001/login");
+    }
     this.fetchLines()
+    console.log(this.state)
+    //console.log(this.context)
+    //this.setCurrentLine(this.context.user.line)
     
+    //console.log(this.context)
   }
 
   render() {
+    //console.log(this.state)
     const info = TokenServices.getAuthInfo(); 
       if(!info){
         return <Redirect to='/login' />
@@ -142,8 +215,8 @@ export default class DashboardBody extends React.Component {
         <div className='dashboardgroup'>
           
           {!!currentStation && <StationBody 
-              station={currentStation} 
-              reports={currentStation.reports} 
+              station={this.state.currentStation} 
+              reports={this.state.currentReports} 
               close = {this.close}
               increaseReports = {this.increaseReports}
               addStrike = {this.addStrike}

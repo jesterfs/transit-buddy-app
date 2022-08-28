@@ -21,6 +21,18 @@ export default class LoginBody extends Component {
                 'Content-type': 'application/json' }
         })
             .then(r => r.json())
+            .then(r => {
+                if(!r) {
+                    console.log('No member sent')
+                    return alert('Username or Password is incorrect')
+                }
+                //console.log(r)
+                this.context.changeUser(r)
+                // this.context.fetchUserData(r.member.id)
+                TokenServices.saveAuthToken(r.token, r.id)
+                this.props.history.push('/dashboard')
+            })
+           
     }
     
     static contextType = ApiContext
@@ -28,16 +40,34 @@ export default class LoginBody extends Component {
     handleSubmitBasicAuth = ev => {
         ev.preventDefault()
         const { email, password } = ev.target
-        this.login(email.value, password.value)
-        .then(r => {
+        console.log(email.value)
+        let result = this.login(email.value, password.value)
+        //console.log(result)
+        //console.log(result[password])
+        /*if(!result) {
+            console.log('No member sent')
+                return alert('Username or Password is incorrect')
+        } else if (email.value !== result.email || password.value !== result.password ) {
+            console.log('incorrect creds')
+                return alert('Username or Password is incorrect')
+        } else {
+            console.log('made it to the end')
+            this.context.changeUser(result)
+            // this.context.fetchUserData(r.member.id)
+            TokenServices.saveAuthToken(result.token, result.id)
+            this.props.history.push('/dashboard')
+        }*/
+        //this.login(email.value, password.value)
+        /*.then(r => {
             if(!r.member) {
+                console.log('No member sent')
                 return alert('Username or Password is incorrect')
             }
             this.context.changeUser(r.member)
             // this.context.fetchUserData(r.member.id)
             TokenServices.saveAuthToken(r.token, r.member.id)
             this.props.history.push('/dashboard')
-        }) 
+        })*/ 
     }
     
     render() {

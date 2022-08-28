@@ -15,6 +15,29 @@ export default class StationBody extends Component {
 
     static contextType = ApiContext;
 
+    fetchReports = (id) => {
+
+        console.log('made it to fetch reports')
+        fetch(cfg.API_ENDPOINT + `reports/station/${id}`, {
+          method: 'GET', 
+          headers: {
+            'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
+            'Content-Type': 'application/json',
+          }
+        })
+          .then(response => response.json())
+          .then(data => 
+            this.setState({
+              reports: data 
+            }, 
+            console.log('made it to the set state part'),
+            console.log(this.state.reports)
+            //console.log(this.state)
+            //forceUpdate()
+          ))
+      };
+    
+
     addReport(report) {
         return fetch(cfg.API_ENDPOINT + 'reports/', {
             method: 'POST', 
@@ -31,16 +54,31 @@ export default class StationBody extends Component {
         if(e.currentTarget.obstacle.value == 'Select an Obstacle'){
             return alert('Select an Obstacle First')
         }
-        let date = new Date()
+
+        const currentDate = new Date();
+
+        const currentDayOfMonth = currentDate.getDate();
+        const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+        const currentYear = currentDate.getFullYear();
+        const time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+
+        const dateString = currentYear + "-" + (currentMonth + 1) + "-" + currentDayOfMonth + " " + time;
+        
+        //console.log(dateString)
         const report = {
             name: e.currentTarget.obstacle.value, 
-            date: date,
+            date: dateString,
             station: this.props.station.id,
         }
+        //console.log(report)
+                
         this.addReport(report) 
-            .then(report => {
-                this.setState({reports: [...this.state.reports, report]})
-                this.props.increaseReports(this.props.station.id)
+            .then(data => {
+                this.setState({reports: [...this.state.reports, report]}, 
+                    this.fetchReports(this.props.station.id)
+                    )
+                
+                
                 alert('report added')
             })
         
@@ -52,16 +90,29 @@ export default class StationBody extends Component {
 
     buttonClick = e => {
         let currentStrikes = e.currentTarget.className
-        let reportId = e.currentTarget.value
+        e.preventDefault()
+        //console.log(currentStrikes)
+        
+        const strikes = {
+            strikes: e.currentTarget.className
+        }
+        //console.log(e.currentTarget.value)
+        this.addStrike(e.currentTarget.value, strikes) 
+            .then(report => {
+                //this.setState({reports: [...this.state.reports, report]})
+                //this.props.increaseReports(this.props.station.id)
+                alert('Resolution reported')
+            })
         e.currentTarget.setAttribute("disabled", "disabled");
         
-        this.addStrike(reportId)
+       
     }
 
-    addStrike(reportId) { 
+    addStrike(reportId, strikes) { 
         
         return fetch(cfg.API_ENDPOINT + 'reports/' + reportId + '/strike', {
-            method: 'POST', 
+            method: 'PUT', 
+            body: JSON.stringify(strikes),
             headers: { 
                 'Authentication' : `Bearer ${TokenServices.getAuthToken()}`,
                 'Content-type': 'application/json' }
@@ -86,6 +137,10 @@ export default class StationBody extends Component {
             }
         }
 
+        componentDidMount() {
+            this.fetchReports(this.props.station.id)
+        }
+
         
     
     render() {
@@ -93,7 +148,7 @@ export default class StationBody extends Component {
         const threeDays = today - (72 * 60 * 60)
         const reports = this.state.reports
         // .filter(report => report.strikes < 3  && new Date(report.date).getTime() / 1000 >= threeDays)
-        
+        //console.log(this.props.reports)
         
         return(
             <div className='popupOverlay'>
