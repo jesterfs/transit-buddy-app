@@ -32,6 +32,9 @@ export default class LoginBody extends Component {
                 TokenServices.saveAuthToken(r.token, r.id)
                 this.props.history.push('/dashboard')
             })
+        .catch(e => {
+    console.log(e);
+});
            
     }
     
