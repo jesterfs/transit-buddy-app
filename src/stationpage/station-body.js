@@ -175,13 +175,11 @@ export default class StationBody extends Component {
                                 <div className='reportDate'>Date</div>
                                 <div className='reportBtn'></div>
                             </div>
-                    <ul>        
-                        {reports.map(report => 
-                            <li className='reportgrid' value={report.id} id={report.id} key={report.id}>
-                                <div className='reportName'>{report.name}</div> 
-                                <div className='reportDate'>{report.date}</div>  
-                                <div className='reportBtn'><button ref={`btn${report.id}`}  value={report.id} className={report.strikes + 1} onClick={this.buttonClick}>Resolved</button></div>
-                            </li>)}
+                    <ul>
+                              
+                    
+
+                            
                     </ul>
                     <form onSubmit={this.formSubmitted}>
                         <h2>Make a Report</h2>
