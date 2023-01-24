@@ -137,15 +137,14 @@ export default class StationBody extends Component {
             const toHours = (diffTime - 480000) / (3.6e+6) 
             const hoursAgo = Math.round(toHours) - 8
             
-            return 'whats up dude'
-
-            /*
+            
+            
             if(toHours < 1) {
                 return Math.round(toMin) + ' min(s) ago'
             } else {
                 return Math.round(toHours) + ' hour(s) ago'
             }
-            */
+            
         }
 
         componentDidMount() {
