@@ -128,8 +128,8 @@ export default class StationBody extends Component {
             const date2 = new Date(date);
             const diffTime = Math.abs(date2 - date1);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-            const toMin = (diffTime) / 60000
-            const toHours = (diffTime) / (3.6e+6) /* adding this to solve UTC issue. Fix if you have time */ - 8
+            const toMin = (diffTime - 480000) / 60000
+            const toHours = (diffTime - 480000) / (3.6e+6) 
 
             if(toHours < 1) {
                 return Math.round(toMin) + ' min(s) ago'
