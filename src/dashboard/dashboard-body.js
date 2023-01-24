@@ -188,7 +188,7 @@ export default class DashboardBody extends React.Component {
 
   componentDidMount() {
     if(!this.context.user) {
-      window.location.replace("http://localhost:3001/login");
+      window.location.replace("https://trans-bud.herokuapp.com/login");
     }
     this.fetchLines()
     console.log(this.state)
