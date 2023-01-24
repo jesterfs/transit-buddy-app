@@ -14,7 +14,7 @@ export default class LoginBody extends Component {
     static contextType = ApiContext;
 
     login(email, password) {
-        return fetch(cfg.API_ENDPOINT + 'members/login', {mode:'no-cors'}, {
+        return fetch(cfg.API_ENDPOINT + 'members/login', {
             method: 'POST', 
             body: JSON.stringify({email, password}),
             headers: {       
