@@ -63,6 +63,7 @@ export default class StationBody extends Component {
         const time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
 
         const dateString = currentYear + "-" + (currentMonth + 1) + "-" + currentDayOfMonth + " " + time;
+        console.log(dateString)
         
         //console.log(dateString)
         const report = {
