@@ -177,7 +177,12 @@ export default class StationBody extends Component {
                             </div>
                     <ul>
                               
-                    
+                    {reports.map(report => 
+                            <li className='reportgrid' value={report.id} id={report.id} key={report.id}>
+                                <div className='reportName'>{report.name}</div> 
+                                 
+                                <div className='reportBtn'><button ref={`btn${report.id}`}  value={report.id} className={report.strikes + 1} onClick={this.buttonClick}>Resolved</button></div>
+                            </li>)}
 
                             
                     </ul>
