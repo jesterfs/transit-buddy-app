@@ -127,6 +127,8 @@ export default class StationBody extends Component {
             const date1 = new Date();
             const date2 = new Date(date);
             const diffTime = Math.abs(date2 - date1);
+            console.log('heyyyyy')
+            console.log(diffTime)
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             const toMin = (diffTime - 480000) / 60000
             const toHours = (diffTime - 480000) / (3.6e+6) 
@@ -146,7 +148,7 @@ export default class StationBody extends Component {
     
     render() {
         const today = new Date().getTime() / 1000
-        console.log(today)
+        
         const threeDays = today - (72 * 60 * 60)
         const reports = this.state.reports
         // .filter(report => report.strikes < 3  && new Date(report.date).getTime() / 1000 >= threeDays)
