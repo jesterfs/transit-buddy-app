@@ -126,7 +126,7 @@ export default class StationBody extends Component {
         daysAgo(date) {
             const date1 = new Date();
             const date2 = new Date(date);
-            const diffTime = Math.abs(date2 - date1);
+            let diffTime = Math.abs(date2 - date1);
             console.log('heyyyyy')
             console.log(diffTime)
             console.log('UPDATE')
