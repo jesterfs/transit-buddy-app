@@ -146,6 +146,7 @@ export default class StationBody extends Component {
     
     render() {
         const today = new Date().getTime() / 1000
+        console.log(today)
         const threeDays = today - (72 * 60 * 60)
         const reports = this.state.reports
         // .filter(report => report.strikes < 3  && new Date(report.date).getTime() / 1000 >= threeDays)
