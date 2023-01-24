@@ -132,7 +132,7 @@ export default class StationBody extends Component {
             console.log('UPDATE')
             diffTime = diffTime - 48000
             console.log(diffTime)
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            const diffDays = Math.ceil(diffTime - 4800 / (1000 * 60 * 60 * 24)); 
             const toMin = (diffTime - 480000) / 60000
             const toHours = (diffTime - 480000) / (3.6e+6) 
             const hoursAgo = Math.round(toHours) - 8
@@ -142,7 +142,7 @@ export default class StationBody extends Component {
             if(toHours < 1) {
                 return Math.round(toMin) + ' min(s) ago'
             } else {
-                return Math.round(toHours) + ' hour(s) ago'
+                return Math.round(toHours - 8) + ' hour(s) ago'
             }
             
         }
