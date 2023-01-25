@@ -14,7 +14,8 @@ export default class DashboardBody extends React.Component {
       stations: [],  
       currentStation: null,
       currentReports:[],
-      lineFetched: false
+      lineFetched: false,
+      user: this.context.user,
   };
 
   static contextType = ApiContext;
@@ -187,11 +188,11 @@ export default class DashboardBody extends React.Component {
   }
 
   componentDidMount() {
-    //if(!this.context.user) {
+    if(!this.state.user) {
       
-      //window.location.replace("https://transitbuddy.netlify.app/login");
-    //}
-    console.log(this.state)
+      window.location.replace("https://transitbuddy.netlify.app/login");
+    }
+    //console.log(this.state)
     this.fetchLines()
     
     //console.log(this.context)
