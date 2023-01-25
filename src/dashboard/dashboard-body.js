@@ -188,9 +188,10 @@ export default class DashboardBody extends React.Component {
 
   componentDidMount() {
     //if(!this.context.user) {
-      if(!TokenServices.getAuthToken()){
-      window.location.replace("https://transitbuddy.netlify.app/login");
-    }
+      
+      //window.location.replace("https://transitbuddy.netlify.app/login");
+    //}
+    console.log(this.context.user)
     this.fetchLines()
     console.log(this.state)
     //console.log(this.context)
