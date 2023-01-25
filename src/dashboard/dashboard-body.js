@@ -5,6 +5,7 @@ import ApiContext from '../ApiContext.js'
 import cfg from '../config.js'
 import TokenServices from '../services/token-services'
 import { Redirect } from 'react-router-dom'
+import config from '../config.js'
 
 export default class DashboardBody extends React.Component {
 
@@ -188,11 +189,11 @@ export default class DashboardBody extends React.Component {
   }
 
   componentDidMount() {
-    //if(!this.state.user) {
+    if(!localStorage.getItem(config.TOKEN_KEY)) {
       
-      //window.location.replace("https://transitbuddy.netlify.app/login");
-    //}
-    console.log(this.context)
+      window.location.replace("https://transitbuddy.netlify.app/login");
+    }
+    //console.log(this.context)
     this.fetchLines()
     
     //console.log(this.context)

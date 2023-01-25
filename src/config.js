@@ -4,7 +4,7 @@ export default {
     //API_ENDPOINT: `https://stormy-reef-88662.herokuapp.com/`,
     
     
-    //TOKEN_KEY: 'easycal-app-auth-token'
+    TOKEN_KEY: 'user-auth-token'
   }
 
   
