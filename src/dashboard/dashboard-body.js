@@ -60,7 +60,7 @@ export default class DashboardBody extends React.Component {
           selectedLine: data,
           stations: data.stations,
           lineFetched: true
-        }, console.log(data)
+        }, 
       ))
   };
 
@@ -112,7 +112,7 @@ export default class DashboardBody extends React.Component {
   }
 
   setCurrentStation = (id) => {
-    console.log(id)
+    //console.log(id)
     fetch(cfg.API_ENDPOINT + `stations/${id}`, {
       method: 'GET', 
       headers: {
@@ -145,8 +145,8 @@ export default class DashboardBody extends React.Component {
         this.setState({
           currentReports: data 
         }, 
-        console.log('made it here'),
-        console.log(data)
+        //console.log('made it here'),
+        //console.log(data)
       ))
   };
 
@@ -191,9 +191,9 @@ export default class DashboardBody extends React.Component {
       
       //window.location.replace("https://transitbuddy.netlify.app/login");
     //}
-    console.log(this.context.user)
-    this.fetchLines()
     console.log(this.state)
+    this.fetchLines()
+    
     //console.log(this.context)
     //this.setCurrentLine(this.context.user.line)
     
