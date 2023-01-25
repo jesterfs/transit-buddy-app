@@ -127,11 +127,9 @@ export default class StationBody extends Component {
             const date1 = new Date();
             const date2 = new Date(date);
             let diffTime = Math.abs(date2 - date1);
-            console.log('heyyyyy')
-            console.log(diffTime)
-            console.log('UPDATE')
+            
             diffTime = diffTime - 48000
-            console.log(diffTime)
+            
             const diffDays = Math.ceil(diffTime - 4800 / (1000 * 60 * 60 * 24)); 
             const toMin = (diffTime - 480000) / 60000
             const toHours = (diffTime - 480000) / (3.6e+6) 
