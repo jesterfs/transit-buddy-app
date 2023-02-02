@@ -247,7 +247,11 @@ export default class DashboardBody extends React.Component {
             
             </div>
             <hr></hr>
-            <p className='instructions'>If a station name is bold, there's an active report.</p>
+    {/*} 
+    
+    <p className='instructions'>If a station name is bold, there's an active report.</p>
+    
+    {*/}
             <div className='stationMap'>
               
               {this.state.stations.map(station =>
